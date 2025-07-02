@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Wooden Dining Table",
+    "description": "Four Seater Dining Table",
+    "description_short": "Four Seater Dining Table suitable for small dining rooms elegent and stylish way to dine with a touch of wood .",
+    "price": 11600,
+    "image": "https://m.media-amazon.com/images/I/61XTLwL8bdL.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Royal Blue Sofa",
+    "description": "Royal blue soft Seater Sofa",
+    "description_short": "Royal blue soft Seater Sofa with a modern design, perfect for any living room. It combines comfort and style.",
+    "price": 14500,
+    "image": "https://m.media-amazon.com/images/I/51CrH-9RGwL._SX300_SY300_QL70_FMwebp_.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Wooden Sofa",
+    "description": "Wooden 3 Seater Sofa",
+    "description_short": "Wooden 3 Seater Sofa with a classic design, perfect for any living room. It combines comfort and style.",
+    "price": 18000,
+    "image": "https://m.media-amazon.com/images/I/51I9UIZ2fdL._SX300_SY300_QL70_FMwebp_.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Royal Sofa",
+    "description": "Wooden 3 Seater Royal Sofa",
+    "description_short": "Wooden 3 Seater Royal Sofa with a classic design, perfect for any living room. It combines comfort and style.",
+    "price": 24500,
+    "image": "https://m.media-amazon.com/images/I/51KfWSjCjzL._SY300_SX300_QL70_FMwebp_.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Home Sofa",
+    "description": "Perfect Wooden 3 Seater Sofa",
+    "description_short": "Perfect Wooden 3 Seater Sofa with a modern design, perfect for any living room. It combines comfort and style.",
+    "price": 18900,
+    "image": "https://m.media-amazon.com/images/I/51wjo4C1DbL._SY300_SX300_QL70_FMwebp_.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Vintage Sofa",
+    "description": "Wooden 3 Seater Vintage Sofa",
+    "description_short": "Wooden 3 Seater Vintage Sofa with a classic design, perfect for any living room. It combines comfort and style.",
+    "price": 34500,
+    "image": "https://m.media-amazon.com/images/I/5160cAX9kSL._SX300_SY300_QL70_FMwebp_.jpg"
+  }
+]
