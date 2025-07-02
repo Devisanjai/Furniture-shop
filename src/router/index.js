@@ -9,7 +9,6 @@ import HomePage from '../components/HomePage.vue'
 
 const routes = [
   { path: '/products', component: ProductCard },
-  { path: '/products', component: ProductCard },
   { path: '/product/:id', component: ProductList }, 
   { path: '/cart', component: CartPage },
   { path: '/payment', component: PaymentPage },
@@ -20,7 +19,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/Furniture-shop/'), // Directly specify the base URL
   routes,
 });
 
