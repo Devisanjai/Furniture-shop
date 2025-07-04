@@ -1,22 +1,44 @@
 <template>
-  <div class="cart-container">
-    <h2 class="mb-4 text-center">Your Cart</h2>
-    <div v-if="cart.length === 0" class="text-center empty-cart">
-      <p>Your cart is empty.</p>
-    </div>
-    <div v-else>
-      <ul class="list-group mb-4">
-        <li 
-          class="list-group-item d-flex justify-content-between align-items-center cart-item" 
-          v-for="(item, index) in cart" 
-          :key="index"
-        >
-          <span>{{ item.name }} - ₹{{ item.price }}</span>
-          <button class="btn btn-sm btn-danger btn-remove" @click="removeFromCart(index)">Remove</button>
-        </li>
-      </ul>
-      <h5 class="total-price">Total: ₹{{ totalPrice }}</h5>
-      <router-link to="/payment" class="btn btn-dark mt-3 btn-proceed">Proceed to Payment</router-link>
+  <div class="page-wrapper">
+    <div class="cart-container">
+      <h2 class="mb-4 text-center">Your Cart</h2>
+      <div v-if="cart.length === 0" class="text-center empty-cart">
+        <p>Your cart is empty.</p>
+      </div>
+      <div v-else>
+        <table class="table table-hover cart-table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in cart" :key="index">
+              <td><img :src="item.image" alt="product" class="product-img" /></td>
+              <td>{{ item.name }}</td>
+              <td>₹{{ item.price }}</td>
+              <td>
+                <div class="quantity-box">
+                  <button @click="decreaseQuantity(index)" class="btn btn-sm btn-outline-secondary">-</button>
+                  <span class="mx-2">{{ item.quantity }}</span>
+                  <button @click="increaseQuantity(index)" class="btn btn-sm btn-outline-secondary">+</button>
+                </div>
+              </td>
+              <td>₹{{ item.price * item.quantity }}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" @click="removeFromCart(index)">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h5 class="total-price">Total: ₹{{ totalPrice }}</h5>
+        <router-link to="/payment" class="btn btn-dark mt-3 btn-proceed">Proceed to Payment</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -34,11 +56,11 @@ export default {
   },
   computed: {
     totalPrice() {
-      return this.cart.reduce((sum, item) => sum + item.price, 0);
+      return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     },
   },
   created() {
-    this.loadCart(); // Load from CartService
+    this.loadCart();
     EventBus.on('cart-updated', this.loadCart);
   },
   unmounted() {
@@ -49,63 +71,68 @@ export default {
       this.cart = CartService.getCart();
     },
     removeFromCart(index) {
-      CartService.removeItem(index); // This will emit cart-updated
+      CartService.removeItem(index);
+    },
+    increaseQuantity(index) {
+      this.cart[index].quantity++;
+      CartService.saveCart(this.cart);
+      EventBus.emit('cart-updated');
+    },
+    decreaseQuantity(index) {
+      if (this.cart[index].quantity > 1) {
+        this.cart[index].quantity--;
+        CartService.saveCart(this.cart);
+        EventBus.emit('cart-updated');
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
 .cart-container {
-  max-width: 600px;
-  width: 90%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  /* Centering the cart in the page */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+  max-width: 900px;
+  width: 95%;
   background-color: #fff;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Playfair Display', serif;
 }
 
-.empty-cart p {
-  font-size: 1.2rem;
-  color: #666;
-  margin-top: 40px;
+.product-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.cart-item {
-  font-size: 1.1rem;
-  padding: 12px 15px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-}
-
-.cart-item:hover {
-  background-color: #f8f9fa;
-}
-
-.btn-remove {
-  font-size: 0.85rem;
-  padding: 4px 10px;
+.quantity-box button {
+  min-width: 30px;
 }
 
 .total-price {
   font-weight: 600;
-  font-size: 1.3rem;
-  margin-top: 10px;
+  font-size: 1.4rem;
+  margin-top: 20px;
   text-align: right;
+  color: #000;
 }
 
 .btn-proceed {
   width: 100%;
   font-weight: 600;
-  padding: 10px;
+  padding: 12px;
   font-size: 1.1rem;
   border-radius: 6px;
   transition: background-color 0.3s ease;

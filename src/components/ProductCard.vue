@@ -22,8 +22,8 @@
             <p class="card-text">{{ product.description }}</p>
             <p class="card-text price"><strong>Price:</strong> ₹{{ product.price }}</p>
             <div class="mt-auto">
-              <button class="btn btn-dark me-2" @click="addToCart(product)">Add to Cart</button>
-              <router-link :to="`/product/${product.id}`" class="btn btn-outline-secondary">View</router-link>
+              <button class="btn btn-dark me-2" @click="addToCart(product)">Add to 🛒</button>
+              <router-link :to="`/product/${product.id}`" class="btn btn-outline-secondary">View Details</router-link>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ export default {
 <style scoped>
 h2 {
   color: #222;
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'Playfair Display', serif;
 }
 
 .product-section {
@@ -151,5 +151,8 @@ h2 {
 .alert {
   margin-bottom: 10px;
  
+}
+.row{
+  font-family: 'Playfair Display', serif;
 }
 </style>

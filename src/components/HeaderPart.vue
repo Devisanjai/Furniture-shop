@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <router-link class="navbar-brand brand-text" to="/">RICHIES</router-link>
+      <router-link class="navbar-brand brand-text" to="/">DS Furniture</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -49,19 +49,17 @@ export default {
   },
   
   created() {
-    this.updateCartCount()
-    EventBus.on('cart-updated', this.updateCartCount)
-  },
-  
-  beforeUnmount() {
-    EventBus.off('cart-updated', this.updateCartCount)
-  },
-  
-  methods: {
-    updateCartCount() {
-      this.cartCount = CartService.getCart().length
-    }
+  this.updateCartCount();
+  EventBus.on('cart-updated', this.updateCartCount);
+},
+methods: {
+  updateCartCount() {
+    this.cartCount = CartService.getCart().length;
   }
+},
+unmounted() {
+  EventBus.off('cart-updated', this.updateCartCount);
+}
 }
 </script>
 
@@ -72,10 +70,11 @@ export default {
   width: 100%;
   z-index: 1030;
   color:white;
+  font-family: 'Playfair Display', serif;
 }
 
 .brand-text {
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   letter-spacing: 2px;
 }
