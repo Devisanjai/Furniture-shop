@@ -26,7 +26,7 @@ export default {
   justify-content: center;
   min-height: 80vh;
   text-align: center;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Playfair Display', serif;
 }
 
 .processing-gif {
